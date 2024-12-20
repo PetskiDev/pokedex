@@ -25,7 +25,38 @@ func initCommands() {
 			description: "Exit the Pokedex",
 			callback:    commandExit,
 		},
+		"map":{
+			name:        "map",
+			description: "show the next 20 locations",
+			callback:    commandMap,
+		},
+		"mapb":{
+			name:        "mapb",
+			description: "show the previous 20 locations",
+			callback:    commandMapB,
+		},
 	}
+}
+
+func commandMap() error{
+	res, err := getNextLocations()
+	if err != nil{
+		return err
+	}
+	for _, loc := range res{
+		fmt.Println(loc.Name)
+	}
+	return nil
+}
+func commandMapB() error{
+	res, err := getPrevLocations()
+	if err != nil{
+		return err
+	}
+	for _, loc := range res{
+		fmt.Println(loc.Name)
+	}
+	return nil
 }
 
 func commandExit() error {
@@ -45,3 +76,4 @@ func commandHelp() error {
 	}
 	return nil
 }
+
