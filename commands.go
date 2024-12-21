@@ -52,6 +52,11 @@ func initCommands() {
 			description: "Print stats of a pokemon",
 			callback:    commandInspect,
 		},
+		"pokedex": {
+			name:        "pokedex",
+			description: "List all pokemon caught",
+			callback:    commandPokedex,
+		},
 	}
 }
 
@@ -106,7 +111,7 @@ func commandExplore(args []string) error {
 	if err != nil {
 		return err
 	}
-	fmt.Println("Found Pokemon:\n", mapName)
+	fmt.Println("Found Pokemon:")
 
 	for _, enc := range allEncounter {
 		fmt.Println(" - " + enc.Name)
@@ -159,5 +164,16 @@ func commandInspect(args []string) error {
 	}
 
 	pokemon.printPokemon()
+	return nil
+}
+
+func commandPokedex(args []string) error {
+	if len(state.pokemonCaught) == 0 {
+		return fmt.Errorf("You don't have any pokemon")
+	}
+	fmt.Println("Your Pokedex:")
+	for name, _ := range state.pokemonCaught {
+		fmt.Printf("\t- %v\n", name)
+	}
 	return nil
 }
