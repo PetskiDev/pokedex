@@ -169,10 +169,10 @@ func commandInspect(args []string) error {
 
 func commandPokedex(args []string) error {
 	if len(state.pokemonCaught) == 0 {
-		return fmt.Errorf("You don't have any pokemon")
+		return fmt.Errorf("you don't have any pokemon")
 	}
 	fmt.Println("Your Pokedex:")
-	for name, _ := range state.pokemonCaught {
+	for name := range state.pokemonCaught {
 		fmt.Printf("\t- %v\n", name)
 	}
 	return nil
